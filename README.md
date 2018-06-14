@@ -1,5 +1,5 @@
 # Udemy Courses
 
 \[Apache Kafka Series\]
-- [Kafka Streams Data Processing]: /https://github.com/DwarfCu/udemy/tree/master/kafka-streams
-  - [WordCount]: /https://github.com/DwarfCu/udemy/tree/master/kafka-streams/wordCount
+- <a href="https://github.com/DwarfCu/udemy/tree/master/kafka-streams">Kafka Streams Data Processing</a>
+  - <a href="https://github.com/DwarfCu/udemy/tree/master/kafka-streams/wordCount">WordCount</a>
