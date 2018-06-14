@@ -16,7 +16,7 @@ public class WordCountApp {
   public static void main(String[] args) {
 
     Properties config = new Properties();
-    config.setProperty(StreamsConfig.APPLICATION_ID_CONFIG, "wordCountAapp");
+    config.setProperty(StreamsConfig.APPLICATION_ID_CONFIG, "wordCountApp");
     config.setProperty(StreamsConfig.BOOTSTRAP_SERVERS_CONFIG, "localhost:9092");
     config.setProperty(StreamsConfig.DEFAULT_KEY_SERDE_CLASS_CONFIG, Serdes.String().getClass().getName());
     config.setProperty(StreamsConfig.DEFAULT_VALUE_SERDE_CLASS_CONFIG, Serdes.String().getClass().getName());

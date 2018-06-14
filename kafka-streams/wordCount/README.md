@@ -65,16 +65,16 @@ Then, the active tasks from the output of the first instance must have changed:
 ```
     $KAFKA_HOME/bin/kafka-console-producer.sh --broker-list localhost:9092 --topic word-count-input
     hello world
-    curso kafka streams
+    course kafka streams
     kafka streams processing
 ```
 ```
     $KAFKA_HOME/bin/kafka-console-consumer.sh --bootstrap-server localhost:9092 --new-consumer --topic word-count-output --from-beginning --formatter kafka.tools.DefaultMessageFormatter --property print.key=true --property print.value=true --property key.deserializer=org.apache.kafka.common.serialization.StringDeserializer --property value.deserializer=org.apache.kafka.common.serialization.LongDeserializer
-    hola	1
-    mundo	1
+    hello	1
+    world	1
     kafka	1
     streams	1
-    curso	1
+    course	1
     kafka	2
     streams	2
     processing	1
