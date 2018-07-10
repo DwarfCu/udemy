@@ -33,7 +33,7 @@ public class BankBalanceApp {
 //        .count();
 
     //wordCounts.toStream().to(Serdes.String(), Serdes.Long(),"bankBalance-output");
-    
+
     input.to(Serdes.String(), Serdes.String(),"bankBalance-output");
 
     KafkaStreams streams = new KafkaStreams(builder.build(), config);
