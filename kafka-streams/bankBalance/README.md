@@ -3,7 +3,6 @@
 ### Environment
 
 0) Download and deploy **Apache Kafka 1.1.0**. Remember set/export $KAFKA_HOME environment var.
-
 1) Start a Zookeeper Server (default configuration):
 ```
 $KAFKA_HOME/bin/zookeeper-server-start.sh $KAFKA_HOME/config/zookeeper.properties
@@ -18,9 +17,7 @@ $KAFKA_HOME/bin/kafka-topics.sh --zookeeper localhost:2181 --topic bankBalance-i
 
 $KAFKA_HOME/bin/kafka-topics.sh --zookeeper localhost:2181 --topic bankBalance-output --create --replication-factor 1 --partitions 2
 ```
-
 Instead of creating the class for the Kafka Producer as requested in the Kafka Streams course, I've chosen to generate a random dataset using the online tool **Mockaroo** and the command ***kafka-producer-perf-test.sh***.
-
 ##### [Mockaroo] Generate Dataset.
 Mockaroo: The maximum download size for free accounts is 1,000 rows, but you can generate as many 'datasets' as you want. Therefore, you can repeat, or automate ;), these steps to build a bigger dataset.
 1) Download a dataset.
@@ -40,11 +37,13 @@ Apply the following expressions to remove '\[' char and replace ']' char:
 ```
 :1,$ s/\[//g
 :1,$ s/\]/,\r/g
-``` 
-
+```
 ##### [Kafka] Producer
 Run *kafka-producer-perf-test.sh* command:
 ``` 
-kafka-producer-perf-test.sh --topic bankBalance--input --num-records 1000 --throughput 100 --payload-file Udemy-KafkaStreams-BankBalanceDataset.json --producer-props bootstrap.servers=localhost:9092
-:1,$ s/\]/,\r/g
-``` 
+kafka-producer-perf-test.sh --topic bankBalance-input --num-records 10000 --throughput 100 --payload-file Udemy-KafkaStreams-BankBalanceDataset.json --producer-props bootstrap.servers=localhost:9092
+```
+Run *kafka-console-consumer.sh* command to check the topic:
+```
+kafka-console-consumer.sh --zookeeper localhost:2181 --topic bankBalance-input --from-beginning
+```

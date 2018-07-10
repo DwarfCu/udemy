@@ -24,15 +24,17 @@ public class BankBalanceApp {
 
     StreamsBuilder builder = new StreamsBuilder();
 
-    KStream<String, String> wordCountInput = builder.stream("bankBalance-input");
+    KStream<String, String> input = builder.stream("bankBalance-input");
 
-    KTable<String, Long> wordCounts = wordCountInput.mapValues(textline -> textline.toLowerCase())
-        .flatMapValues(loweredTextLine -> Arrays.asList((loweredTextLine.split(" "))))
-        .selectKey((ignoredKey, word) -> word)
-        .groupByKey()
-        .count();
+//    KTable<String, Long> wordCounts = wordCountInput.mapValues(textline -> textline.toLowerCase())
+//        .flatMapValues(loweredTextLine -> Arrays.asList((loweredTextLine.split(" "))))
+//        .selectKey((ignoredKey, word) -> word)
+//        .groupByKey()
+//        .count();
 
-    wordCounts.toStream().to(Serdes.String(), Serdes.Long(),"bankBalance-output");
+    //wordCounts.toStream().to(Serdes.String(), Serdes.Long(),"bankBalance-output");
+    
+    input.to(Serdes.String(), Serdes.String(),"bankBalance-output");
 
     KafkaStreams streams = new KafkaStreams(builder.build(), config);
     streams.start();
