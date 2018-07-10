@@ -13,6 +13,7 @@
 
     <modules>
         <module>wordCount</module>
+        <module>bankBalance</module>
     </modules>
 
 </project>
