@@ -2,7 +2,6 @@ package com.dwarfcu.udemy.kafka.streams;
 
 
 import org.apache.kafka.clients.consumer.ConsumerConfig;
-import org.apache.kafka.clients.producer.ProducerConfig;
 import org.apache.kafka.common.serialization.Serdes;
 import org.apache.kafka.streams.KafkaStreams;
 import org.apache.kafka.streams.StreamsBuilder;
@@ -22,7 +21,7 @@ public class BankBalanceApp {
     config.setProperty(StreamsConfig.DEFAULT_KEY_SERDE_CLASS_CONFIG, Serdes.String().getClass().getName());
     config.setProperty(StreamsConfig.DEFAULT_VALUE_SERDE_CLASS_CONFIG, Serdes.String().getClass().getName());
     config.setProperty(ConsumerConfig.AUTO_OFFSET_RESET_CONFIG, "earliest");
-    
+
     StreamsBuilder builder = new StreamsBuilder();
 
     KStream<String, String> wordCountInput = builder.stream("bankBalance-input");
