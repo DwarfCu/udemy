@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.dwarfcu.udemy.kafka.streams</groupId>
-    <artifactId>wordCount</artifactId>
+    <artifactId>favouriteColour</artifactId>
     <version>1.0-SNAPSHOT</version>
 
     <dependencies>
@@ -55,7 +55,7 @@
                     <archive>
                         <manifest>
                             <addClasspath>true</addClasspath>
-                            <mainClass>com.dwarfcu.udemy.kafka.streams.WordCountApp</mainClass>
+                            <mainClass>com.dwarfcu.udemy.kafka.streams.favouriteColourApp</mainClass>
                         </manifest>
                     </archive>
                 </configuration>
