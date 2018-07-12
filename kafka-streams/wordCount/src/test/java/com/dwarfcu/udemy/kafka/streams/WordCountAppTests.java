@@ -20,11 +20,11 @@ import static org.junit.Assert.assertEquals;
 
 public class WordCountAppTests {
 
-  TopologyTestDriver testDriver;
+  private TopologyTestDriver testDriver;
 
-  StringSerializer stringSerializer = new StringSerializer();
+  private StringSerializer stringSerializer = new StringSerializer();
 
-  ConsumerRecordFactory<String, String> recordFactory = new ConsumerRecordFactory<>(stringSerializer, stringSerializer);
+  private ConsumerRecordFactory<String, String> recordFactory = new ConsumerRecordFactory<>(stringSerializer, stringSerializer);
 
   @Before
   public void setUpTopologyTestDriver() {
@@ -70,6 +70,7 @@ public class WordCountAppTests {
     assertEquals(readOutput(), null);
   }
 
+  @Test
   public void makeSureWordsBecomeLowercase() {
     String upperCaseString = "KAFKA kafka Kafka";
     pushNewInputRecord(upperCaseString);
