@@ -3,6 +3,7 @@ package com.dwarfcu.udemy.kafka.streams;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.node.JsonNodeFactory;
 import com.fasterxml.jackson.databind.node.ObjectNode;
+import com.google.common.base.Strings;
 import org.apache.kafka.clients.consumer.ConsumerConfig;
 import org.apache.kafka.common.serialization.Deserializer;
 import org.apache.kafka.common.serialization.Serde;
@@ -10,6 +11,7 @@ import org.apache.kafka.common.serialization.Serdes;
 import org.apache.kafka.common.serialization.Serializer;
 import org.apache.kafka.connect.json.JsonDeserializer;
 import org.apache.kafka.connect.json.JsonSerializer;
+import org.apache.kafka.streams.Consumed;
 import org.apache.kafka.streams.KafkaStreams;
 import org.apache.kafka.streams.StreamsBuilder;
 import org.apache.kafka.streams.StreamsConfig;
@@ -22,17 +24,10 @@ import java.util.Properties;
 public class BankBalanceApp {
   public static void main(String[] args) {
 
-    // json Serde
-    final Serializer<JsonNode> jsonSerializer = new JsonSerializer();
-    final Deserializer<JsonNode> jsonDeserializer = new JsonDeserializer();
-    final Serde<JsonNode> jsonSerde = Serdes.serdeFrom(jsonSerializer, jsonDeserializer);
-
     Properties config = new Properties();
     config.setProperty(StreamsConfig.APPLICATION_ID_CONFIG, "BankBalanceApp");
     config.setProperty(StreamsConfig.BOOTSTRAP_SERVERS_CONFIG, "localhost:9092");
     config.setProperty(ConsumerConfig.AUTO_OFFSET_RESET_CONFIG, "earliest");
-    //config.setProperty(StreamsConfig.DEFAULT_KEY_SERDE_CLASS_CONFIG, Serdes.String().getClass().getName());
-    //config.setProperty(StreamsConfig.DEFAULT_VALUE_SERDE_CLASS_CONFIG, jsonSerde.getClass().getName());
 
     // NOT recommended in production environment
     config.setProperty(StreamsConfig.CACHE_MAX_BYTES_BUFFERING_CONFIG, "0");
@@ -40,9 +35,14 @@ public class BankBalanceApp {
     // Exactly once processing!!!
     config.setProperty(StreamsConfig.PROCESSING_GUARANTEE_CONFIG, StreamsConfig.EXACTLY_ONCE);
 
+    // json Serde
+    final Serializer<JsonNode> jsonSerializer = new JsonSerializer();
+    final Deserializer<JsonNode> jsonDeserializer = new JsonDeserializer();
+    final Serde<JsonNode> jsonSerde = Serdes.serdeFrom(jsonSerializer, jsonDeserializer);
+
     StreamsBuilder builder = new StreamsBuilder();
 
-    KStream<String, JsonNode> transactions = builder.stream("bankBalance-input");
+    KStream<String, JsonNode> transactions = builder.stream("bankBalance-input", Consumed.with(Serdes.String(), jsonSerde));
 
     // Create initial JSON
     // Option 1)
@@ -85,9 +85,16 @@ public class BankBalanceApp {
     newBalance.put("balance", balance.get("balance").asInt() + transaction.get("amount").asInt());
 
     Long balanceEpoch = Instant.parse(balance.get("time").asText()).toEpochMilli();
-    Long transactionEpoch = Instant.parse(transaction.get("time").asText()).toEpochMilli();
+
+    String date = transaction.get("date").asText();
+    String time = Strings.padStart(transaction.get("time").asText(), 8, '0');
+    String dateTime = date + 'T' + time + 'Z';
+    Long transactionEpoch = Instant.parse(dateTime).toEpochMilli();
+
     Instant newBalanceInstant = Instant.ofEpochMilli(Math.max(balanceEpoch, transactionEpoch));
+
     newBalance.put("time", newBalanceInstant.toString());
+    
     return newBalance;
   }
 }
