@@ -5,13 +5,32 @@ import org.apache.kafka.common.serialization.Serdes;
 import org.apache.kafka.streams.KafkaStreams;
 import org.apache.kafka.streams.StreamsConfig;
 import org.apache.kafka.streams.StreamsBuilder;
+import org.apache.kafka.streams.Topology;
 import org.apache.kafka.streams.kstream.KStream;
 import org.apache.kafka.streams.kstream.KTable;
+import org.apache.kafka.streams.kstream.Produced;
 
 import java.util.Arrays;
 import java.util.Properties;
 
 public class WordCountApp {
+
+  public Topology createTopology() {
+    StreamsBuilder builder = new StreamsBuilder();
+
+    KStream<String, String> wordCountInput = builder.stream("word-count-input");
+
+    KTable<String, Long> wordCounts = wordCountInput
+        .mapValues(textline -> textline.toLowerCase())
+        .flatMapValues(loweredTextLine -> Arrays.asList((loweredTextLine.split(" "))))
+        .selectKey((ignoredKey, word) -> word)
+        .groupByKey()
+        .count();
+
+    wordCounts.toStream().to("word-count-output", Produced.with(Serdes.String(), Serdes.Long()));
+
+    return builder.build();
+  }
 
   public static void main(String[] args) {
 
@@ -22,19 +41,9 @@ public class WordCountApp {
     config.setProperty(StreamsConfig.DEFAULT_VALUE_SERDE_CLASS_CONFIG, Serdes.String().getClass().getName());
     config.setProperty(ConsumerConfig.AUTO_OFFSET_RESET_CONFIG, "earliest");
 
-    StreamsBuilder builder = new StreamsBuilder();
+    WordCountApp wordCountApp = new WordCountApp();
 
-    KStream<String, String> wordCountInput = builder.stream("word-count-input");
-
-    KTable<String, Long> wordCounts = wordCountInput.mapValues(textline -> textline.toLowerCase())
-        .flatMapValues(loweredTextLine -> Arrays.asList((loweredTextLine.split(" "))))
-        .selectKey((ignoredKey, word) -> word)
-        .groupByKey()
-        .count();
-
-    wordCounts.toStream().to(Serdes.String(), Serdes.Long(),"word-count-output");
-
-    KafkaStreams streams = new KafkaStreams(builder.build(), config);
+    KafkaStreams streams = new KafkaStreams(wordCountApp.createTopology(), config);
     streams.start();
 
     System.out.println(streams.toString());
