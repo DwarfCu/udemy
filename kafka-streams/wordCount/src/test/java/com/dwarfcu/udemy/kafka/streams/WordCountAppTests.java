@@ -12,7 +12,6 @@ import org.apache.kafka.streams.test.OutputVerifier;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-import sun.util.resources.cldr.gv.LocaleNames_gv;
 
 import java.util.Properties;
 
