@@ -31,8 +31,8 @@ public class BankBalanceApp {
     config.setProperty(StreamsConfig.APPLICATION_ID_CONFIG, "BankBalanceApp");
     config.setProperty(StreamsConfig.BOOTSTRAP_SERVERS_CONFIG, "localhost:9092");
     config.setProperty(ConsumerConfig.AUTO_OFFSET_RESET_CONFIG, "earliest");
-    config.setProperty(StreamsConfig.DEFAULT_KEY_SERDE_CLASS_CONFIG, Serdes.String().getClass().getName());
-    config.setProperty(StreamsConfig.DEFAULT_VALUE_SERDE_CLASS_CONFIG, jsonSerde.getClass().getName());
+    //config.setProperty(StreamsConfig.DEFAULT_KEY_SERDE_CLASS_CONFIG, Serdes.String().getClass().getName());
+    //config.setProperty(StreamsConfig.DEFAULT_VALUE_SERDE_CLASS_CONFIG, jsonSerde.getClass().getName());
 
     // NOT recommended in production environment
     config.setProperty(StreamsConfig.CACHE_MAX_BYTES_BUFFERING_CONFIG, "0");
