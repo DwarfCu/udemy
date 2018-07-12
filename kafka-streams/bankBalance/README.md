@@ -21,7 +21,7 @@
     ```
 Instead of creating the class for the Kafka Producer as requested in the Kafka Streams course, I've chosen to generate a random dataset using the online tool **Mockaroo** and the command ***kafka-producer-perf-test.sh***.
 ##### [Mockaroo] Generate Dataset.
-Note: However, an example dataset is provided in the resources/data directory. Skip the following steps if you decide to use it.
+Note: However, an example dataset is provided in the resources/data directory. Skip the following steps, if you decide to use it, and go to [Kafka] Consumer & Producer section
 
 Mockaroo: The maximum download size for free accounts is 1,000 rows, but you can generate as many 'datasets' as you want. Therefore, you can repeat, or automate ;), these steps to build a bigger dataset.
 1) Download a dataset.
