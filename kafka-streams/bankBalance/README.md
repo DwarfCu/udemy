@@ -46,7 +46,7 @@ Apply the following expressions to remove '\[' char and the last ',', and replac
 ##### [Kafka] Consumer & Producer
 1) Run *kafka-console-consumer.sh* command to check the topic:
     ```
-    kafka-console-consumer.sh --zookeeper localhost:2181 --topic bankBalance-ouput --from-beginning --formatter kafka.tools.Default.MessageFormatter --property print.key=true --property print.value=true --property key.deserializer=org.apache.kafka.common.serialization.StringDeserializer --property value.deserializer=org.apache.kafka.common.serialization.StringDeserializer
+    kafka-console-consumer.sh --zookeeper localhost:2181 --topic bankBalance-ouput --from-beginning --formatter kafka.tools.DefaultMessageFormatter --property print.key=true --property print.value=true --property key.deserializer=org.apache.kafka.common.serialization.StringDeserializer --property value.deserializer=org.apache.kafka.common.serialization.StringDeserializer
     ```
     
 2) Run *kafka-producer-perf-test.sh* command:

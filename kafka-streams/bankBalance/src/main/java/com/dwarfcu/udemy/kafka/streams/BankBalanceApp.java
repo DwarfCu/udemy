@@ -94,7 +94,7 @@ public class BankBalanceApp {
     Instant newBalanceInstant = Instant.ofEpochMilli(Math.max(balanceEpoch, transactionEpoch));
 
     newBalance.put("time", newBalanceInstant.toString());
-    
+
     return newBalance;
   }
 }
