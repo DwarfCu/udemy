@@ -84,17 +84,17 @@ public class DwarfCuRecordExamples {
     // Read a generic record from a file
     final File file = new File("ciclista-generic.avro");
     final DatumReader<GenericRecord> datumReader = new GenericDatumReader<>();
-    GenericRecord customerRead;
+    GenericRecord ciclistaRead;
     try (DataFileReader<GenericRecord> dataFileReader = new DataFileReader<>(file, datumReader)){
-      customerRead = dataFileReader.next();
+      ciclistaRead = dataFileReader.next();
       System.out.println("Successfully read avro file");
-      System.out.println(customerRead.toString());
+      System.out.println(ciclistaRead.toString());
 
       // get the data from the generic record
-      System.out.println("Nombre: " + customerRead.get("nombre"));
+      System.out.println("Nombre: " + ciclistaRead.get("nombre"));
 
       // read a non existent field
-      System.out.println("Campo inexistente: " + customerRead.get("no_existe"));
+      System.out.println("Campo inexistente: " + ciclistaRead.get("no_existe"));
     }
     catch(IOException e) {
       e.printStackTrace();
