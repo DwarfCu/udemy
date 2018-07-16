@@ -95,6 +95,9 @@ public class DwarfCuRecordExamples {
 
       // read a non existent field
       System.out.println("Campo inexistente: " + ciclistaRead.get("no_existe"));
+
+      // get the full record
+      System.out.println(ciclistaRead.toString());
     }
     catch(IOException e) {
       e.printStackTrace();
