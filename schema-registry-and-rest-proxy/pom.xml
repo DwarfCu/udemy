@@ -1,19 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!--this file is not important for your Kafka streams learning-->
 <project xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <artifactId>udemy-parent-project</artifactId>
+        <groupId>com.dwarfcu.udemy.kafka.stream</groupId>
+        <version>1.0</version>
+    </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>com.dwarfcu.udemy.kafka.stream</groupId>
-    <artifactId>udemy-parent-project</artifactId>
-    <version>1.0</version>
-
+    <artifactId>schema-registry-and-rest-proxy</artifactId>
     <packaging>pom</packaging>
 
     <modules>
-        <module>kafka-streams</module>
-        <module>schema-registry-and-rest-proxy</module>
+        <module>avro-examples</module>
+        <module>kafka-avro-v1</module>
+        <module>kafka-avro-v2</module>
     </modules>
-
 </project>

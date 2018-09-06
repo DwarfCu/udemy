@@ -1,0 +1,25 @@
+[ {
+    "type": "record",
+	"namespace": "com.dwarfcu",
+	"name": "trayectoria",
+	"doc": "Trayectoria de un ciclista",
+	"fields": [
+        { "name": "equipo", "type": "string", "doc": "..." },
+        { "name": "fecha_inicio", "type": "int", "logicalType": "date" },
+        { "name": "fecha_fin", "type": "int", "logicalType": "date" }
+    ]
+}, {
+    "type": "record",
+    "namespace": "com.dwarfcu",
+    "name": "ciclistas",
+    "doc": "Avro schema para ciclistas",
+    "fields": [
+        { "name": "nombre", "type": "string", "doc": "..." },
+        { "name": "altura", "type": "int", "doc": "en cms" },
+        { "name": "peso", "type": "float", "doc": "en Kgs" },
+        { "name": "activo", "type": "boolean", "doc": "default true" },
+        { "name": "emails", "type": { "type": "array", "items": "string" }, "default": [ ] },
+        { "name": "trayectoria", "type": { "type": "array", "items": "com.dwarfcu.trayectoria" } , "default": [ ], "doc": "" },
+        { "name": "strava", "type": ["null", "string"], "default": null, "doc": "URL de su cuenta de Strava" }
+    ]
+} ]
