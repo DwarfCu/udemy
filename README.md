@@ -5,4 +5,4 @@
   - <a href="https://github.com/DwarfCu/udemy/tree/master/kafka-streams/wordCount">WordCount</a>
    - <a href="https://github.com/DwarfCu/udemy/tree/master/kafka-streams/favouriteColour">FavouriteColour</a>
    - <a href="https://github.com/DwarfCu/udemy/tree/master/kafka-streams/bankBalance">BankBalance</a>
-- <a href="hhttps://github.com/DwarfCu/udemy/tree/master/schema-registry-and-rest-proxy">Schema Registry & REST Proxy</a>
+- <a href="https://github.com/DwarfCu/udemy/tree/master/schema-registry-and-rest-proxy">Schema Registry & REST Proxy</a>
